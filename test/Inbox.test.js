@@ -43,4 +43,18 @@ describe('Inbox', () => {
 
     assert.equal(message, INITIAL_MESSAGE);
   });
+
+  it('can change the message', async () => {
+    const newMessage = 'test new msg';
+
+    // we get transaction receipt back, but we don't use that
+    // so we don't need to assign that to a variable
+    // if it fails it will just crash here
+    await inbox.methods.setMessage(newMessage)
+      .send({ from: accounts[0] });
+
+    const message = await inbox.methods.message().call();
+
+    assert.equal(message, newMessage);
+  });
 });
