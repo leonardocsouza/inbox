@@ -11,40 +11,17 @@ const Web3 = require('web3');
 // lowercase first letter (w) because this is the instance
 const web3 = new Web3(ganache.provider());
 
-beforeEach(() => {
+let accounts;
+
+beforeEach(async () => {
   // Get a list of all accounts
-  web3.eth.getAccounts()
-    .then(fetchedAccounts => {
-      console.log(fetchedAccounts);
-    }); // Returns a promise
+  accounts = await web3.eth.getAccounts();
 
   // Use one of those accounts to deploy the contract
 });
 
 describe('Inbox', () => {
   it('deploys a contract', () => {
-    console.log('blah');
+    console.log(accounts);
   });
 });
-// class Car {
-//   park() {
-//     return 'stopped';
-//   }
-//   drive() {
-//     return 'vroom';
-//   }
-// }
-// // Declare variable outside so we can use it for the "it" tests
-// let car;
-// beforeEach(() => {
-//   car = new Car();
-// });
-// describe('Car', () => {
-//   it('can park', () => {
-//     assert.equal(car.park(), 'stopped');
-//   });
-//   it('can drive', () => {
-//     assert.equal(car.drive(), 'vroom');
-//   });
-// });
-
