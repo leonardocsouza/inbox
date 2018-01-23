@@ -5,11 +5,13 @@ const ganache = require('ganache-cli');
 // this is defined this way by convention
 const Web3 = require('web3');
 
+const provider = ganache.provider();
+
 // having a constructor to create a separate instance
 // allows us to connect to more than one ethereum network
 // from the same project (though this isn't that common)
 // lowercase first letter (w) because this is the instance
-const web3 = new Web3(ganache.provider());
+const web3 = new Web3(provider);
 
 const { interface, bytecode} = require('../compile');
 
@@ -24,6 +26,8 @@ beforeEach(async () => {
   inbox = await new web3.eth.Contract(JSON.parse(interface))
     .deploy({ data: bytecode, arguments: ['hello world'] })
     .send({ from: accounts[0], gas: '1000000' });
+
+  inbox.setProvider(provider);
 });
 
 describe('Inbox', () => {
