@@ -6,3 +6,6 @@ node_modules/
 npm-debug.log
 testem.log
 .directory
+
+# environment variables
+.env
